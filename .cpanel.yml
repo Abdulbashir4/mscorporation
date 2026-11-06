@@ -1,0 +1,12 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/mscorporation/mscorporation/
+    - /bin/cp -R $DEPLOYPATH/. /home/mscorporation/public_html/mscorporation/ 2>/dev/null || true
+    - cd /home/mscorporation/mscorporation && composer install --no-dev --optimize-autoloader
+    - cd /home/mscorporation/mscorporation && php artisan migrate --force
+    - cd /home/mscorporation/mscorporation && php artisan config:cache
+    - cd /home/mscorporation/mscorporation && php artisan route:cache
+    - cd /home/mscorporation/mscorporation && php artisan view:cache
+    - cd /home/mscorporation/mscorporation && npm install
+    - cd /home/mscorporation/mscorporation && npm run build
