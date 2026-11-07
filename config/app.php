@@ -118,6 +118,9 @@ return [
     |
     */
 
+    'access_username' => env('APP_ACCESS_USERNAME'),
+    'access_password' => env('APP_ACCESS_PASSWORD'),
+
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
