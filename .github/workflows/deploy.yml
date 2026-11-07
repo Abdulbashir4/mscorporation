@@ -32,14 +32,14 @@ jobs:
       - name: Test application
         run: |
           composer install --prefer-dist --no-interaction
+          npm install --global pnpm@10
+          pnpm install --frozen-lockfile
+          pnpm run build
           cp .env.example .env
           php artisan key:generate
           php artisan test --compact
       - name: Build production files
         run: |
-          npm install --global pnpm@10
-          pnpm install --frozen-lockfile
-          pnpm run build
           composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
           mkdir -p release
           rsync -a app bootstrap config database public resources routes vendor artisan composer.json composer.lock release/ --exclude='bootstrap/cache/*.php' --exclude='public/hot' --exclude='public/storage'
